@@ -42,9 +42,9 @@ jobs:
 
     - name: Push changes to my repository
       run: |
-        git config user.name "GitHub Action"
-        git config user.email "action@github.com"
+        # git config user.name "GitHub Action"
+        # git config user.email "action@github.com"
         git add -A
-        git commit -m "Updated directories from external repo"
-        git push https://${{secrets.ACCESS_TOKEN}}@github.com/ExAxoncel/probable-eureka.git
+        git commit -m "Updated"
+        git push
 
