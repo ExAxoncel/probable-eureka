@@ -1,0 +1,52 @@
+name: Sparse Checkout
+
+on:
+  schedule:
+    - cron: '0 19,7 * * *'  # This corresponds to 3:00 and 15:00 Beijing time (UTC+8)
+
+jobs:
+  copy-subdirectories:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout this repository
+      uses: actions/checkout@v2
+
+    - name: Sparse checkout from external repository
+      run: |
+        mkdir temp
+        cd temp
+
+        git init
+        git remote add origin https://github.com/blackmatrix7/ios_rule_script.git
+        git config core.sparseCheckout true
+
+        echo "rule/Clash/Apple" >> .git/info/sparse-checkout
+        echo "rule/Clash/AsianMedia" >> .git/info/sparse-checkout
+        echo "rule/Clash/Bing" >> .git/info/sparse-checkout
+        echo "rule/Clash/ChinaMax" >> .git/info/sparse-checkout
+        echo "rule/Clash/China" >> .git/info/sparse-checkout
+        echo "rule/Clash/GlobalMedia" >> .git/info/sparse-checkout
+        echo "rule/Clash/Lan" >> .git/info/sparse-checkout
+        echo "rule/Clash/Microsoft" >> .git/info/sparse-checkout
+        echo "rule/Clash/PayPal" >> .git/info/sparse-checkout
+        echo "rule/Clash/Telegram" >> .git/info/sparse-checkout
+
+        git pull origin master
+
+    - name: Copy directories to root
+      run: |
+        cp -r temp/rule/Clash/* ./
+
+    - name: Remove temp directory
+      run: |
+        rm -rf temp
+
+    - name: Push changes to my repository
+      run: |
+        git config user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git add -A
+        git commit -m "Updated directories from external repo"
+        git push
+
