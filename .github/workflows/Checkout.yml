@@ -39,6 +39,7 @@ jobs:
       run: |
         cp -r temp/* ./
         rm -rf temp
+        ls -l ./
 
     - name: Push changes to my repository
       run: |
@@ -46,5 +47,7 @@ jobs:
         git config user.email "action@github.com"
         git add -A
         git commit -m "Updated by Action"
-        git push https://${{ secrets.ACCESS_TOKEN }}@github.com/ExAxoncel/probable-eureka.git
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
