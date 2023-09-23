@@ -3,6 +3,7 @@ name: Sparse Checkout
 on:
   schedule:
     - cron: '0 19,7 * * *'  # This corresponds to 3:00 and 15:00 Beijing time (UTC+8)
+  workflow_dispatch:
 
 jobs:
   copy-subdirectories:
