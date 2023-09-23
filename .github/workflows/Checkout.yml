@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  copy-subdirectories:
+  fork-subdirectories:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,10 +37,7 @@ jobs:
 
     - name: Copy directories to root
       run: |
-        cp -r temp/rule/Clash/* ./
-
-    - name: Remove temp directory
-      run: |
+        cp -r temp/* ./
         rm -rf temp
 
     - name: Push changes to my repository
@@ -49,5 +46,5 @@ jobs:
         git config user.email "action@github.com"
         git add -A
         git commit -m "Updated directories from external repo"
-        git push
+        git push https://${{secrets.GITHUB_TOKEN}}@github.com/ExAxoncel/probable-eureka.git
 
