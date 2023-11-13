@@ -23,6 +23,7 @@ jobs:
         git config core.sparseCheckout true
 
         echo "rule/Clash/Apple" >> .git/info/sparse-checkout
+        echo "rule/Clash/AppleNews" >> .git/info/sparse-checkout
         echo "rule/Clash/AsianMedia" >> .git/info/sparse-checkout
         echo "rule/Clash/Bing" >> .git/info/sparse-checkout
         echo "rule/Clash/ChinaMax" >> .git/info/sparse-checkout
