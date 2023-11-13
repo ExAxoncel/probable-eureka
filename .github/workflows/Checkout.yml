@@ -47,8 +47,8 @@ jobs:
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
         git add -A
-        git commit -m "Updated by Action"
-        git push
+        git diff --staged --exit-code && echo "No changes to commit" || git commit -m "Updated by Action"
+        git push origin HEAD:main || echo "No changes to push"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
